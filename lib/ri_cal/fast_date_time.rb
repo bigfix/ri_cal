@@ -20,15 +20,15 @@ module RiCal
     def self.from_date_time(date_time)
       new(date_time.year, date_time.month, date_time.day, date_time.hour, date_time.min, date_time.sec, (date_time.offset * SECONDS_IN_A_DAY).to_i)
     end
-    
+
     def self.from_time(time)
       new(time.year, time.month, time.day, time.hour, time.min, time.sec, (time.utc_offset.offset * SECONDS_IN_A_DAY))
     end
-    
+
     def self.from_date(date)
       new(date.year, date.month, date.day, 0, 0, 0, 0)
     end
-    
+
     def self.from_date_at_end_of_day(date)
       new(date.year, date.month, date.day, 23, 59, 59, 0)
     end
@@ -56,7 +56,7 @@ module RiCal
     def day
       @date.day
     end
-    
+
     def wday
       @date.wday
     end
@@ -84,7 +84,7 @@ module RiCal
     # def jd
     #   date.jd
     # end
-    # 
+    #
     def days_in_month
       date.days_in_month
     end
@@ -121,7 +121,7 @@ module RiCal
     end
 
     def hms_to_seconds(hours, minutes, seconds)
-      seconds + 60 *(minutes + (60 * hours))
+      seconds + 60 * (minutes + (60 * hours))
     end
 
     def seconds_to_hms(total_seconds)
@@ -139,7 +139,7 @@ module RiCal
       elsif new_secs_since_bod > 0
         [day_delta + (new_secs_since_bod / SECONDS_IN_A_DAY), new_secs_since_bod % SECONDS_IN_A_DAY]
       else
-        [day_delta - (1 + new_secs_since_bod.abs / SECONDS_IN_A_DAY), 
+        [day_delta - (1 + new_secs_since_bod.abs / SECONDS_IN_A_DAY),
          SECONDS_IN_A_DAY - (new_secs_since_bod.abs % SECONDS_IN_A_DAY)]
       end
      end
@@ -180,13 +180,13 @@ module RiCal
         (last_in_month.advance(:days => - (7*(n.abs - 1))))
       end
     end
-    
+
     # Determine the equivalent time on the day which falls on a particular weekday of the same year as the receiver
     #
     # == Parameters
     # n:: the ordinal number being requested
     # which_wday:: the weekday using Ruby time conventions, i.e. 0 => Sunday, 1 => Monday, ...
-    
+
     # e.g. to obtain the 2nd Monday of the receivers year use
     #
     #   time.nth_wday_in_year(2, 1)
@@ -211,24 +211,24 @@ module RiCal
       date -= 1 while date.wday != wkst
       date
     end
-    
+
     def iso_weeks_in_year(wkst)
       @date.iso_weeks_in_year(wkst)
     end
-    
+
     def iso_year_start(wkst)
       @date.iso_year_start(wkst)
     end
-    
+
     def iso_year_and_week_one_start(wkst)
       @date.iso_year_and_week_one_start(wkst)
     end
-    
+
     def cmp_fast_date_time_value(other)
       other <=> self
     end
 
-    
+
   end
 
 end
